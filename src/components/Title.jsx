@@ -8,10 +8,8 @@ const Title = ({primaryText,secondaryText}) => {
         </div>
     );
 };
-
 Title.propTypes = {
     primaryText: PropTypes.string,
     secondaryText: PropTypes.string,
 }
-
 export default Title;
