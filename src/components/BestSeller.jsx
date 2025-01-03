@@ -3,13 +3,14 @@ import {ShopContext} from "../context/ShopContext.jsx";
 import Title from "./Title.jsx";
 import ProductItem from "./ProductItem.jsx";
 
+
 const BestSeller = () => {
     const {products} = useContext(ShopContext);
     const [bestSeller, setBestSeller] = useState([]);
     useEffect(() => {
         const bestProducts = products.filter((item) => (item.bestseller));
         setBestSeller(bestProducts.slice(0,5));
-    }, [])
+    }, [products])
     return (
         <div className="my-10">
             <div className={"text-center text-3xl py-8"}>
