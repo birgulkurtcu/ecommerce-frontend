@@ -3,7 +3,7 @@ import {useContext} from "react";
 import Title from "./Title.jsx";
 
 const CartTotal = () => {
-    const {currency, deliveryFee, getCartAmount} = useContext(ShopContext);
+    const {currency, delivery_fee, getCartAmount} = useContext(ShopContext);
     return (
         <div className={"w-full"}>
             <div className={"text-2xl"}>
@@ -18,13 +18,13 @@ const CartTotal = () => {
 
                 <div className={"flex justify-between"}>
                     <p>Shipping Fee</p>
-                    <p> {currency} {deliveryFee}.00 </p>
+                    <p> {currency} {delivery_fee}.00 </p>
                 </div>
                 <hr />
 
                 <div className={"flex justify-between"}>
                     <b>Total</b>
-                    <b> {currency} {getCartAmount() === 0 ? 0 : getCartAmount() + deliveryFee}.00 </b>
+                    <b> {currency} {getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee}.00 </b>
                 </div>
             </div>
         </div>
