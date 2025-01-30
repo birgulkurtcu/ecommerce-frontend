@@ -84,29 +84,37 @@ const PlaceOrder = () => {
             switch (method) {
                 //API Calls for COD
                 case "cod":
-                    const response = await axios.post(backendUrl + '/api/order/place', orderData, {headers: {token}});
+                    { const response = await axios.post(backendUrl + '/api/order/place', orderData, {headers: {token}});
                     if (response.data.success) {
                         setCartItems({})
                         navigate('/orders')
                     } else {
                         toast.error(response.data.message)
                     }
-                    break;
+                    break; }
                 case "stripe":
-                    const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, {headers: {token}})
+                    { const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, {headers: {token}})
                     if (responseStripe.data.success) {
                         const {session_url} = responseStripe.data
                         window.location.replace(session_url)
                     } else {
                         toast.error(responseStripe.data.message)
                     }
-                    break;
+                    break; }
                 case "razorpay" :
-                    const responseRazorpay = await axios.post(backendUrl + '/api/order/razorpay', orderData, {headers:{token}})
+                    { const responseRazorpay = await axios.post(backendUrl + '/api/order/razorpay', orderData, {headers:{token}})
                     if (responseRazorpay.data.success) {
                         initPay(responseRazorpay.data.order)
                     }
-                    break;
+                    break; }
+                case "paytr":
+                    { const responsePaytr = await axios.post(backendUrl + "/api/order/paytr/get-token");
+                    if (responsePaytr.data.success) {
+                        window.location.href = `${backendUrl}/api/paytr/payment-page?token=${responsePaytr.data.token}`;
+                    } else {
+                        toast.error(responsePaytr.data.message);
+                    }
+                    break; }
                 default:
                     break;
             }
@@ -188,6 +196,10 @@ const PlaceOrder = () => {
                              className={"flex items-center gap-3 border p-2 px-3 cursor-pointer"}>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
                             <p className={"text-gray-500 text-sm font-medium mx-4"}>CASH ON DELIVERY</p>
+                        </div>
+                        <div onClick={() => setMethod('paytr')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
+                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'paytr' ? 'bg-green-400' : ''}`}></p>
+                            <p className="text-gray-500 text-sm font-medium mx-4">PAYTR</p>
                         </div>
                     </div>
                     <div className={"w-full text-end mt-8"}>
