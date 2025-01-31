@@ -14,6 +14,7 @@ import SearchBar from "./components/SearchBar.jsx";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Verify from "./pages/Verify.jsx";
+import PaymentButton from "./components/PayTR.jsx";
 
 const App = () => {
     return (
@@ -34,6 +35,10 @@ const App = () => {
                 <Route path="/verify" element={<Verify/>}/>
             </Routes>
             <Footer/>
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <h1>Ödeme Sayfasına Git</h1>
+                <PaymentButton />
+            </div>
         </div>
     );
 };
